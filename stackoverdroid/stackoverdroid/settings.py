@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from . import env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PARENT_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
 
 
 # Quick-start development settings - unsuitable for production
@@ -118,4 +120,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATICFILES_DIRS = [
+    os.path.join(PARENT_DIR, "node_modules"),
+]
+
+
 STATIC_URL = '/static/'
+WEBSITE_URL = env.WEBSITE_URL
+STATIC_ROOT = "{}{}".format(WEBSITE_URL, 'node_modules')
