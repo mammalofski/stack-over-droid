@@ -14,7 +14,7 @@
                  ng-repeat="question in questions"
                  ng-mouseenter="showQuestionShowButton = true"
                  ng-mouseleave="showQuestionShowButton = false"
-                 ng-init="showQuestionBody = false; showQuestionShowButton = false; showButtonClicked = false">
+                 ng-init="showQuestionBody = false; showAnswers = false; showQuestionShowButton = false; showQuestionButtonClicked = false;showAnswerButtonClicked = false">
                 <img alt="32x32"
                      class="mr-4 rounded" style="width: 32px; height: 32px;"
                      ng-src="{{ question.owner.profile_image }}"
@@ -27,34 +27,48 @@
                             class="btn btn-outline-primary d-inline-block border-0 ml-1"
                             data-toggle="collapse" data-target="#question-{{ question.question_id }}"
                             aria-expanded="false" aria-controls="question-{{ question.question_id }}"
-                            ng-click="showQuestionBody = !showQuestionBody;showButtonClicked = true">{{ showQuestionBody ? 'Hide Question' : 'Show Question' }}
+                            ng-click="showQuestionBody = !showQuestionBody;showQuestionButtonClicked = true">
+                        {{ showQuestionBody ? 'Hide Question' : 'Show Question' }}
                     </button>
                     <!--<div id="question-{{ question.question_id }}" ng-style="showQuestionBody && {'opacity': '1'}" class="question-body">-->
-                    <div id="question-{{ question.question_id }}" ng-if="showButtonClicked">
+                    <div id="question-{{ question.question_id }}"
+                         ng-if="showQuestionButtonClicked">
                         <div class="media-body-html" ng-bind-html="question.body | trustHTML"></div>
 
-                        <div class="media mt-3 answer" ng-repeat="answer in question.answers">
-                            <a href="#">
-                                <img alt="32x32"
-                                     class="mr-2 rounded" style="width: 32px; height: 32px;"
-                                     ng-src="{{ answer.owner.profile_image }}"
-                                     data-holder-rendered="true">
-                            </a>
-                            <div class="media-body pb-2 ">
-                                <div class="media-body-html" ng-bind-html="answer.body | trustHTML"></div>
-                                <div class="media mt-3 comment" ng-repeat="comment in answer.comments">
-                                    <a href="#">
-                                        <img alt="32x32"
-                                             class="mr-2 rounded" style="width: 32px; height: 32px;"
-                                             ng-src="{{ comment.owner.profile_image }}"
-                                             data-holder-rendered="true">
-                                    </a>
-                                    <div class="media-body pb-2 ">
-                                        <div class="media-body-html" ng-bind-html="comment.body | trustHTML"></div>
+                        <button type="button"
+                                ng-show="question.answer_count > 0"
+                                ng-click="showAnswerButtonClicked = true;showAnswers = !showAnswers"
+                                data-toggle="collapse" data-target="#answers-{{ question.question_id }}"
+                                aria-expanded="false" aria-controls="answers-{{ question.question_id }}"
+                                class="btn btn-outline-success mt-3 border-0"> {{ showAnswers ? 'Hide answers' : 'Show answers' }}
+                        </button>
+                        <button ng-show="question.answer_count == 0"
+                                type="button" class="btn btn-outline-success mt-3 border-0">No answers</button>
+                        <div id="answers-{{ question.question_id }}" ng-show="showAnswerButtonClicked">
+                            <div class="media mt-3 answer" ng-repeat="answer in question.answers">
+                                <a href="#">
+                                    <img alt="32x32"
+                                         class="mr-2 rounded" style="width: 32px; height: 32px;"
+                                         ng-src="{{ answer.owner.profile_image }}"
+                                         data-holder-rendered="true">
+                                </a>
+                                <div class="media-body pb-2 ">
+                                    <div class="media-body-html" ng-bind-html="answer.body | trustHTML"></div>
+                                    <div class="media mt-3 comment" ng-repeat="comment in answer.comments">
+                                        <a href="#">
+                                            <img alt="32x32"
+                                                 class="mr-2 rounded" style="width: 32px; height: 32px;"
+                                                 ng-src="{{ comment.owner.profile_image }}"
+                                                 data-holder-rendered="true">
+                                        </a>
+                                        <div class="media-body pb-2 ">
+                                            <div class="media-body-html" ng-bind-html="comment.body | trustHTML"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
