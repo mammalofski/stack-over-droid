@@ -3,9 +3,9 @@ angular.module('Stackoverdroid', ['ui.router'])
         // $authProvider.tokenType = 'Token';
         $urlRouterProvider.otherwise("/");
         $stateProvider
-            .state('main', {
+            .state('questions', {
                 url: "/",
-                templateUrl: "/static/modules/stackoverdroid/views/main-page.html"
+                templateUrl: "/static/modules/stackoverdroid/views/questions.html"
             });
 
     });
