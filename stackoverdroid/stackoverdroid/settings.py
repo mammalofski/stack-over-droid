@@ -122,6 +122,7 @@ USE_TZ = True
 
 STATICFILES_DIRS = [
     os.path.join(PARENT_DIR, "node_modules"),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 

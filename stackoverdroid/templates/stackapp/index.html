@@ -1,6 +1,6 @@
 {% load static from staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="Stackoverdroid" ng-controller="stackoverdroidCtrl">
 <head>
     <meta charset="UTF-8">
     <title>Stack-Over-Flow</title>
@@ -8,9 +8,20 @@
 
 </head>
 <body>
-    Hello World!
-</body>
+<div>
+    <div ui-view></div>
+</div>
+
+<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
 <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'jquery/dist/jquery.min.js' %}" ></script>
-<script src="{% static 'angular/angular.min.js' %}" defer></script>
+<script src="{% static 'angular/angular.min.js' %}" ></script>
+<script src="{% static '@uirouter/angularjs/release/angular-ui-router.min.js' %}" ></script>
+
+<!-- Modules, Controllers, Services -->
+<script src="{% static 'modules/stackoverdroid/stackoverdroidApp.js' %}" ></script>
+<script src="{% static 'modules/stackoverdroid/controllers/stackoverdroidCtrl.js' %}" ></script>
+<script src="{% static 'modules/stackoverdroid/controllers/questionsCtrl.js' %}" ></script>
+<script src="{% static 'modules/stackoverdroid/services/httpRequest.js' %}" ></script>
+
+</body>
 </html>

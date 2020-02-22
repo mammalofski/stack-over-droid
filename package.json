@@ -5,6 +5,7 @@
   "description": "",
   "repository": "https://github.com/mammalofski/stack-over-droid",
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.25",
     "angular": "1.7.x",
     "bootstrap": "4.4.x",
     "jquery": "^3.4.1"
