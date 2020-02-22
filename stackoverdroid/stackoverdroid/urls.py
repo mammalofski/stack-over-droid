@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views import generic
 
 urlpatterns = [
+    path('', generic.TemplateView.as_view(template_name='stackapp/index.html')),
     path('admin/', admin.site.urls),
+
 ]
