@@ -1,0 +1,3 @@
+.media .media-body {
+    max-width: calc(100% - 1rem);
+}

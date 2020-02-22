@@ -10,3 +10,10 @@ angular.module('Stackoverdroid', ['ui.router'])
 
     });
 
+angular.module("Stackoverdroid")
+    .filter("trustHTML", ['$sce', function ($sce) {
+        return function (htmlCode) {
+            return $sce.trustAsHtml(htmlCode);
+        };
+    }]);
+
