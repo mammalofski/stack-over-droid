@@ -1,14 +1,15 @@
 angular.module('Stackoverdroid')
     .service('httpRequest', function httpRequest($q, $http, $location, $stateParams, $rootScope) {
         var service = {
-            'API_URL': window.location.origin,
+            // 'API_URL': window.location.origin,
+            'API_URL': 'https://api.stackexchange.com/2.2',
             'use_session': false,
             'authenticated': null,
             'authPromise': null,
             'request': function (args) {
-                if ($auth.getToken()) {
-                    $http.defaults.headers.common.Authorization = 'Token ' + $auth.getToken();
-                }
+                // if ($auth.getToken()) {
+                //     $http.defaults.headers.common.Authorization = 'Token ' + $auth.getToken();
+                // }
                 // Continue
                 params = args.params || {};
                 args = args || {};
@@ -19,19 +20,19 @@ angular.module('Stackoverdroid')
                     data = args.data || {};
                 // Fire the request, as configured.
                 var that = this;
-                $http({
+                $.ajax({
                     url: url,
-                    withCredentials: this.use_session,
+                    // withCredentials: this.use_session,
                     method: method.toUpperCase(),
-                    headers: {'X-CSRFToken': $cookies.get("csrftoken")},
+                    // headers: {'X-CSRFToken': $cookies.get("csrftoken")},
                     params: params,
                     data: data
                 })
-                    .success(angular.bind(this, function (data, status, headers, config) {
+                    .done(angular.bind(this, function (data, status, headers, config) {
                         deferred.resolve(data, status);
 
                     }))
-                    .error(angular.bind(this, function (data, status, headers, config) {
+                    .fail(angular.bind(this, function (data, status, headers, config) {
                         console.log("error syncing with: " + url);
 
                         // Set request status
@@ -68,10 +69,10 @@ angular.module('Stackoverdroid')
                     }));
                 return deferred.promise;
             },
-            'user': function () {
+            'getQuestions': function (queryParams) {
                 return this.request({
                     'method': "GET",
-                    'url': "/rest-auth/user/"
+                    'url': "/questions/?" + queryParams
                 });
             },
 
