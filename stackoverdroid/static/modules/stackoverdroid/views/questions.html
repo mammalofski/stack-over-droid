@@ -1,15 +1,71 @@
 <div ng-controller="questionsCtrl">
     <main class="container">
-        <ul class="nav nav-pills nav-fill mt-3">
-            <li class="nav-item">
-                <a class="nav-link ng-class:{'active': sortType == 'creation'}"
-                   ng-click="!fetchingQuestions && changeSorting('creation')">Latest Questions</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link ng-class:{'active': sortType == 'votes'}"
-                   ng-click="!fetchingQuestions && changeSorting('votes')">Top Voted Questions</a>
-            </li>
-        </ul>
+        <div ng-init="more = false">
+            <ul class="nav nav-pills nav-fill mt-3">
+                <li class="nav-item">
+                    <a class="nav-link ng-class:{'active': sortType == 'creation'}"
+                       ng-click="!fetchingQuestions && changeSorting('creation')">Latest Questions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ng-class:{'active': sortType == 'votes'}"
+                       ng-click="!fetchingQuestions && changeSorting('votes')">Top Voted Questions</a>
+                </li>
+            </ul>
+            <div ng-init="moreIsClicked=false">
+                <button ng-click="more = !more; moreIsClicked = true" class="mt-1 btn btn-link"
+                     data-toggle="collapse" data-target="#more-options"
+                     aria-expanded="false" aria-controls="more-options">
+                    {{ more ? 'less' : 'more options' }}</button>
+                <div ng-if="moreIsClicked">
+                    <div id="more-options" class="card border-primary mb-3">
+                        <div class="card-body p-3">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#tags">Tags</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#paging">Paging</a>
+                                </li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade show active" id="tags">
+                                    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu
+                                        stumptown aliqua, retro synth master cleanse. Mustache cliche tempor,
+                                        williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh
+                                        dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex
+                                        squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan
+                                        american apparel, butcher voluptate nisi qui.</p>
+                                </div>
+                                <div class="tab-pane fade" id="paging">
+                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee
+                                        squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes
+                                        anderson artisan four loko farm-to-table craft beer twee. Qui photo booth
+                                        letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
+                                        cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus
+                                        mollit.</p>
+                                </div>
+                                <div class="tab-pane fade" id="dropdown1">
+                                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out
+                                        mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.
+                                        Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore
+                                        carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings
+                                        gentrify squid 8-bit cred pitchfork.</p>
+                                </div>
+                                <div class="tab-pane fade" id="dropdown2">
+                                    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before
+                                        they sold out master cleanse gluten-free squid scenester freegan cosby sweater.
+                                        Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo
+                                        park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
+                                        farm-to-table VHS viral locavore cosby sweater.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <div class="loading-overlay text-center">
             <div class="lds-ring">
                 <div></div>
@@ -18,18 +74,19 @@
                 <div></div>
             </div>
         </div>
-        <div class="my-3 p-3 bg-dark rounded box-shadow main-body">
+        <div class="my-2 p-3 bg-dark rounded box-shadow main-body">
             <h6 class="pb-2 mb-0 border-bottom border-light">Questions</h6>
             <div class="media mt-2 question"
                  ng-repeat="question in questions"
                  ng-init="showQuestionBody = false; showAnswers = false; showQuestionButtonClicked = false;showAnswerButtonClicked = false">
                 <div>
                     <img alt="32x32"
-                     onerror="this.src='/static/images/default_profile_image.png';"
-                     class="mr-4 rounded" style="width: 32px; height: 32px;"
-                     ng-src="{{ question.owner.profile_image }}"
-                     data-holder-rendered="true">
-                    <div class="question-paradata pt-1 pl-0 text-center" ng-style="showQuestionBody && {'opacity': '1', 'display': 'block'}">
+                         onerror="this.src='/static/images/default_profile_image.png';"
+                         class="mr-4 rounded" style="width: 32px; height: 32px;"
+                         ng-src="{{ question.owner.profile_image }}"
+                         data-holder-rendered="true">
+                    <div class="question-paradata pt-1 pl-0 text-center"
+                         ng-style="showQuestionBody && {'opacity': '1', 'display': 'block'}">
                         <div class="paradata mt-1">{{ question.answer_count }}</div>
                         <div class="paradata mb-2">answer{{ question.score == 1 ? '' : 's' }}</div>
                         <div class="paradata">{{ question.score }}</div>
@@ -49,7 +106,9 @@
                     <div id="question-{{ question.question_id }}"
                          ng-if="showQuestionButtonClicked" class="question-body">
 
-                        <div class="badge mr-1 ng-class:{'badge-primary': tag != 'android', 'badge-danger': tag == 'android'}" ng-repeat="tag in question.tags">{{ tag }}</div>
+                        <div class="badge mr-1 ng-class:{'badge-primary': tag != 'android', 'badge-danger': tag == 'android'}"
+                             ng-repeat="tag in question.tags">{{ tag }}</div>
+                        <a target="_blank" ng-href="{{ question.link }}">question link</a>
 
                         <div class="media-body-html" ng-bind-html="question.body | trustHTML"></div>
 
@@ -73,7 +132,8 @@
                         </button>
 
                         <div id="answers-{{ question.question_id }}" ng-show="showAnswerButtonClicked">
-                            <div class="media mt-3 answer" ng-repeat="answer in question.answers | orderBy: 'score' | orderBy: '-is_accepted'">
+                            <div class="media mt-3 answer"
+                                 ng-repeat="answer in question.answers | orderBy: 'score' | orderBy: '-is_accepted'">
                                 <a href="#">
                                     <img alt="32x32"
                                          class="mr-2 rounded" style="width: 32px; height: 32px;"
@@ -82,7 +142,7 @@
                                 </a>
                                 <div class="media-body pb-2 ">
                                     <div class="media-body-html" ng-bind-html="answer.body | trustHTML"></div>
-                                    <div class="media mt-3 comment" ng-repeat="comment in answer.comments">
+                                    <div class="media mt-1 comment" ng-repeat="comment in answer.comments">
                                         <a href="#">
                                             <img alt="32x32"
                                                  class="mr-2 rounded" style="width: 32px; height: 32px;"
@@ -96,12 +156,12 @@
                                 </div>
                             </div>
                             <button type="button"
-                                ng-click="$parent.showQuestionBody = !$parent.showQuestionBody"
-                                data-toggle="collapse" data-target="#question-{{ question.question_id }}"
-                                aria-expanded="false" aria-controls="question-{{ question.question_id }}"
-                                class="btn btn-outline-primary mt-3 border-0">
-                            Close Question
-                        </button>
+                                    ng-click="$parent.showQuestionBody = !$parent.showQuestionBody"
+                                    data-toggle="collapse" data-target="#question-{{ question.question_id }}"
+                                    aria-expanded="false" aria-controls="question-{{ question.question_id }}"
+                                    class="btn btn-outline-primary mt-3 border-0">
+                                Close Question
+                            </button>
                         </div>
 
                     </div>

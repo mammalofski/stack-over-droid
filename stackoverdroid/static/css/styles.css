@@ -8,6 +8,8 @@
 .media .media-body-html {
     border-radius: 4px;
     padding: 0.5rem 1rem;
+    max-height: 670px;
+    overflow-y: auto;
 }
 
 .media.question > .media-body > div > .media-body-html {
@@ -109,4 +111,5 @@
     display: block;
     padding: 0.25em 0.4em;
 }
+
 

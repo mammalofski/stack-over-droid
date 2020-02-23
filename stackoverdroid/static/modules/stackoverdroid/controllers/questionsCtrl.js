@@ -911,10 +911,8 @@ angular.module("Stackoverdroid")
         };
 
         // function scripts() {
-        //     // fix height
-        //     const windowHeight = $(window).height();
-        //     console.log(windowHeight - 100);
-        //     $('main.container').height(windowHeight - 100);
+        //     const mediaBodyHeight= $(window).height() - 30;
+        //     $('.media .media-body-html').css('max-height', mediaBodyHeight + 'px');
         // }
 
 
