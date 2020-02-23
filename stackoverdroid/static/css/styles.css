@@ -112,4 +112,8 @@
     padding: 0.25em 0.4em;
 }
 
+#more-options #tags .tab-content .input-group-text {
+    cursor: pointer;
+}
+
 

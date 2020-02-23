@@ -4,6 +4,7 @@ angular.module("Stackoverdroid")
             console.log('hello world in questions');
             $scope.fetchingQuestions = false;
             $scope.questions = [];
+            $scope.moreTags = [];
             $scope.sortType = 'creation';
             const args = argBuilderForGetQuestion();
             getQuestions(args);
@@ -899,10 +900,18 @@ angular.module("Stackoverdroid")
                 'fromdate': null,
                 'todate': null,
                 'sort': $scope.sortType,
-                'tags': [],
+                'tags': $scope.moreTags,
                 'filter': null,
             };
         }
+
+        $scope.applyTags = function(tags) {
+            $scope.moreTags = tags.join(';');
+            const args = argBuilderForGetQuestion();
+            console.log(args);
+            getQuestions(args);
+
+        };
 
         $scope.changeSorting = function (sort) {
             $scope.sortType = sort;
