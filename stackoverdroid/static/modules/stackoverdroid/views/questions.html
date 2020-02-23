@@ -19,16 +19,24 @@
             </div>
         </div>
         <div class="my-3 p-3 bg-dark rounded box-shadow main-body">
-            <h6 class="pb-2 mb-0 ">Questions</h6>
+            <h6 class="pb-2 mb-0 border-bottom border-light">Questions</h6>
             <div class="media mt-2 question"
                  ng-repeat="question in questions"
                  ng-init="showQuestionBody = false; showAnswers = false; showQuestionButtonClicked = false;showAnswerButtonClicked = false">
-
-                <img alt="32x32"
+                <div>
+                    <img alt="32x32"
                      onerror="this.src='/static/images/default_profile_image.png';"
                      class="mr-4 rounded" style="width: 32px; height: 32px;"
                      ng-src="{{ question.owner.profile_image }}"
                      data-holder-rendered="true">
+                    <div class="question-paradata pt-1 pl-0 text-center" ng-style="showQuestionBody && {'opacity': '1', 'display': 'block'}">
+                        <div class="paradata mt-1">{{ question.answer_count }}</div>
+                        <div class="paradata mb-2">answer{{ question.score == 1 ? '' : 's' }}</div>
+                        <div class="paradata">{{ question.score }}</div>
+                        <div class="paradata mb-1">score{{ question.score == 1 ? '' : 's' }}</div>
+                    </div>
+                </div>
+
                 <div class="media-body pb-2 small">
                     <div data-toggle="collapse" data-target="#question-{{ question.question_id }}"
                          aria-expanded="false" aria-controls="question-{{ question.question_id }}"
@@ -52,7 +60,7 @@
                                 type="button" class="btn btn-outline-success mt-3 border-0">No answers
                         </button>
                         <div id="answers-{{ question.question_id }}" ng-show="showAnswerButtonClicked">
-                            <div class="media mt-3 answer" ng-repeat="answer in question.answers">
+                            <div class="media mt-3 answer" ng-repeat="answer in question.answers | orderBy: 'score' | orderBy: '-is_accepted'">
                                 <a href="#">
                                     <img alt="32x32"
                                          class="mr-2 rounded" style="width: 32px; height: 32px;"
