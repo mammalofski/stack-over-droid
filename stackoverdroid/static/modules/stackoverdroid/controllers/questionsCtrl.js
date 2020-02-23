@@ -53,6 +53,7 @@ angular.module("Stackoverdroid")
             this.fetchQuestions = function (queryParams) {
                 $scope.fetchingQuestions = true;
                 loading();
+                $scope.questions = [];
                 httpRequest.getQuestions(queryParams).then(
                     function (data) {
                         $scope.data = data;

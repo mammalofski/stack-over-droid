@@ -113,6 +113,7 @@
         </div>
         <div class="my-2 p-3 bg-dark rounded box-shadow main-body">
             <h6 class="pb-2 mb-0 border-bottom border-light">Questions</h6>
+            <h6 class="pb-2 my-3" ng-if="!questions.length">No questions to show ... try changing the filters</h6>
             <div class="media mt-2 question"
                  ng-repeat="question in questions"
                  ng-init="showQuestionBody = false; showAnswers = false; showQuestionButtonClicked = false;showAnswerButtonClicked = false">
