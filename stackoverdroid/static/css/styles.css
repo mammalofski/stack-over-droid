@@ -29,18 +29,18 @@
     max-width: 95%;
 }
 
-/*.media .media-body .media-body-html pre {*/
-    /*margin-bottom: 1em;*/
-    /*padding: 12px 8px;*/
-    /*width: auto;*/
-    /*max-height: 600px;*/
-    /*overflow: auto;*/
-    /*font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif;*/
-    /*font-size: 13px;*/
-    /*background-color: rgb(52, 56, 58);*/
-    /*color: rgb(193, 190, 185);*/
-    /*border-radius: 3px;*/
-/*}*/
+.media .media-body .media-body-html pre {
+    margin-bottom: 1em;
+    padding: 12px 8px;
+    width: auto;
+    max-height: 600px;
+    overflow: auto;
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif;
+    font-size: 13px;
+    background-color: rgb(52, 56, 58);
+    color: rgb(193, 190, 185);
+    border-radius: 3px;
+}
 
 .media.answer .media-body {
     max-width: calc(100% - 5rem);

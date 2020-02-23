@@ -3,12 +3,12 @@
         <div ng-init="more = false">
             <ul class="nav nav-pills nav-fill mt-3">
                 <li class="nav-item">
-                    <a class="nav-link ng-class:{'active': sortType == 'creation'}"
-                       ng-click="!fetchingQuestions && changeSorting('creation')">Latest Questions</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link ng-class:{'active': sortType == 'votes'}"
                        ng-click="!fetchingQuestions && changeSorting('votes')">Top Voted Questions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ng-class:{'active': sortType == 'creation'}"
+                       ng-click="!fetchingQuestions && changeSorting('creation')">Latest Questions</a>
                 </li>
             </ul>
             <div ng-init="moreIsClicked=false">
@@ -183,7 +183,8 @@
                                         </div>
                                         <div class="paradata mt-1">{{ answer.score }}</div>
                                         <div class="paradata">score{{ answer.score == 1 ? '' : 's' }}</div>
-                                        <div class="paradata mt-3"><a target="_blank" ng-href="{{ answer.link }}">answer link</a> </div>
+                                        <div class="paradata mt-3"><a target="_blank" ng-href="{{ answer.link }}">answer
+                                            link</a></div>
                                     </div>
                                 </div>
 
@@ -219,5 +220,21 @@
         </div>
 
     </main>
+
+    <div class="modal fade">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Error!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Congratulations. You have successfully located the bug delicately placed in the website! <br><br>Now, Please let me know so I can fix it! </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
