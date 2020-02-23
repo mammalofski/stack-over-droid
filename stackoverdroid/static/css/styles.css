@@ -120,3 +120,51 @@
     background-color: #222222;
 }
 
+._720kb-datepicker-calendar._720kb-datepicker-open {
+    width: 39%;
+}
+
+#filter datepicker input {
+    width: 115px;
+}
+
+#filter datepicker {
+    width: auto;
+    float: none;
+}
+
+
+/*the date picker styles*/
+._720kb-datepicker-calendar-header:nth-child(odd) {
+    background-color: #222222;
+}
+
+._720kb-datepicker-calendar-month span {
+    color: #b2b2b2;
+}
+
+._720kb-datepicker-calendar-header a, ._720kb-datepicker-calendar-header a:hover {
+    color: #b2b2b2;
+}
+
+._720kb-datepicker-calendar-header:nth-child(even) {
+    background-color: #222222;
+    color: #b2b2b2;
+}
+
+._720kb-datepicker-calendar-days-header {
+    background-color: #535353;
+    color: #b2b2b2;
+}
+
+._720kb-datepicker-calendar-day._720kb-datepicker-active, ._720kb-datepicker-calendar-day:hover {
+    color: #3b87ba;
+}
+
+._720kb-datepicker-calendar._720kb-datepicker-open {
+    left: 0;
+}
+
+#filter .custom-select {
+    margin-top: -1px;
+}

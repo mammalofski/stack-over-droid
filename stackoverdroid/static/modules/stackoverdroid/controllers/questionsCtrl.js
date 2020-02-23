@@ -7,6 +7,11 @@ angular.module("Stackoverdroid")
             $scope.questions = [];
             $scope.data = null;
             $scope.moreTags = "";
+            $scope.ordering = "desc";
+            const now = new Date();
+            $scope.fromdate = normalizeDate(new Date(now.getTime() - 7 * 24 * 3600));
+            $scope.todate = normalizeDate(now);
+            console.log($scope.todate);
             $scope.page = 1;
             $scope.pageSize = 10;
             $scope.sortType = 'creation';
@@ -14,6 +19,10 @@ angular.module("Stackoverdroid")
             getQuestions(args);
 
             // scripts()
+        }
+
+        function normalizeDate(date) {
+            return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
         }
 
         function getQuestions(args) {
@@ -35,6 +44,7 @@ angular.module("Stackoverdroid")
             // this is a default filter that constructs the body of the response as desired. read the docs for more information about the filters
             // this.filter = args.filter || '!3ykawLJfw6AVzZXKD';
             this.filter = args.filter || '!LfpZw1*uDvSdxDi6imvuty';
+            this.order = args.order || 'desc';
 
             this.fetchQuestions = function (queryParams) {
                 $scope.fetchingQuestions = true;
@@ -1285,7 +1295,7 @@ angular.module("Stackoverdroid")
 
             this.buildQueryParams = function () {
                 const tags = this.tags.join(';');
-                return `page=${this.page}&pagesize=${this.pageSize}&fromdate=${this.fromdate}&todate=${this.todate}&order=desc&sort=${this.sort}&tagged=${tags}&site=stackoverflow&filter=${this.filter}`;
+                return `page=${this.page}&pagesize=${this.pageSize}&fromdate=${this.fromdate}&todate=${this.todate}&order=${this.order}&sort=${this.sort}&tagged=${tags}&site=stackoverflow&filter=${this.filter}`;
             };
 
             this.get = function () {
@@ -1312,11 +1322,16 @@ angular.module("Stackoverdroid")
         }
 
         function argBuilderForGetQuestion() {
+            const fromdate = new Date($scope.fromdate);
+            const todate = new Date($scope.todate);
+            console.log($scope.fromdate);
+            console.log(fromdate);
             return {
                 'page': $scope.page,
                 'pageSize': $scope.pageSize,
-                'fromdate': null,
-                'todate': null,
+                'fromdate': fromdate.getTime(),
+                'todate': todate.getTime(),
+                'order': $scope.ordering,
                 'sort': $scope.sortType,
                 'tags': $scope.moreTags,
                 'filter': null,
@@ -1331,6 +1346,12 @@ angular.module("Stackoverdroid")
 
         };
 
+        $scope.filterAndOrder = function () {
+            const args = argBuilderForGetQuestion();
+            console.log(args);
+            getQuestions(args);
+        };
+
         $scope.paging = function (page, pageSize) {
             $scope.pageSize = pageSize;
             if (page === 'next') {
@@ -1341,6 +1362,18 @@ angular.module("Stackoverdroid")
             const args = argBuilderForGetQuestion();
             console.log(args);
             getQuestions(args);
+        };
+
+        $scope.setFromDate = function(fromdate) {
+            $scope.fromdate = fromdate;
+        };
+
+        $scope.setToDate = function(todate) {
+            $scope.todate = todate;
+        };
+
+        $scope.setOrdering = function(ordering) {
+            $scope.ordering = ordering;
         };
 
         $scope.changeSorting = function (sort) {
