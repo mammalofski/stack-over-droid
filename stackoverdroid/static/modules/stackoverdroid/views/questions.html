@@ -18,7 +18,9 @@
                  ng-mouseenter="showQuestionShowButton = true"
                  ng-mouseleave="showQuestionShowButton = false"
                  ng-init="showQuestionBody = false; showAnswers = false; showQuestionShowButton = false; showQuestionButtonClicked = false;showAnswerButtonClicked = false">
+
                 <img alt="32x32"
+                     onerror="this.src='/static/images/default_profile_image.png';"
                      class="mr-4 rounded" style="width: 32px; height: 32px;"
                      ng-src="{{ question.owner.profile_image }}"
                      data-holder-rendered="true">
