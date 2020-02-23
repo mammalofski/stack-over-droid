@@ -4,12 +4,29 @@ angular.module("Stackoverdroid")
             console.log('hello world in questions');
             $scope.fetchingQuestions = false;
             $scope.questions = [];
-            const questionType = 'latest';
-            getQuestions(questionType);
+            $scope.sortType = 'creation';
+            const args = argBuilderForGetQuestion();
+            getQuestions(args);
         }
 
-        function getQuestions(type) {
-            this.questionType = type;
+        function getQuestions(args) {
+            // read the stackoverflow api docs (https://api.stackexchange.com/docs) for more information about these attributes
+            const now = new Date();
+            // set for tonight at midnight
+            now.setHours(11, 59, 59);
+            this.page = args.page || 1;
+            this.pageSize = args.pageSize || 10;
+            // a week ago
+            this.fromdate = args.fromdate || now.getTime() - 7 * 24 * 60 * 60;
+            this.todate = args.todate || now.getTime();
+            // we mostly use creation and votes, but there are other options as well, again, please read the docs
+            this.sort = args.sort || 'creation';
+             // the main idea of the page is about android related questions
+            this.tags = ['android'];
+             // add other tags if needed
+            this.tags.concat(args.tags);
+            // this is a default filter that constructs the body of the response as desired. read the docs for more information about the filters
+            this.filter = args.filter || '!3ykawLJfw6AVzZXKD';
 
             this.fetchQuestions = function (queryParams) {
                 $scope.fetchingQuestions = true;
@@ -31,8 +48,10 @@ angular.module("Stackoverdroid")
                 // )
             };
 
+
             this.buildQueryParams = function () {
-                return "page=1&pagesize=10&fromdate=1581811200&todate=1582329600&order=desc&sort=activity&tagged=android&site=stackoverflow&filter=!3ykawLJfw6AVzZXKD"
+                const tags = this.tags.join(';');
+                return `page=${this.page}&pagesize=${this.pageSize}&fromdate=${this.fromdate}&todate=${this.todate}&order=desc&sort=${this.sort}&tagged=${tags}&site=stackoverflow&filter=${this.filter}`;
             };
 
             this.get = function () {
@@ -42,6 +61,24 @@ angular.module("Stackoverdroid")
 
             this.get();
         }
+
+        function argBuilderForGetQuestion() {
+            return {
+                'page': 1,
+                'pageSize': 10,
+                'fromdate': null,
+                'todate': null,
+                'sort': $scope.sortType,
+                'tags': [],
+                'filter': null,
+            };
+        }
+
+        $scope.changeSorting = function(sort) {
+            $scope.sortType = sort;
+            const args = argBuilderForGetQuestion();
+            getQuestions(args);
+        };
 
 
         initialize()

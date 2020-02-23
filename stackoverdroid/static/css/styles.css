@@ -79,3 +79,15 @@
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out, opacity 0.1s ease-in-out;
 }
 
+.nav.nav-pills .nav-item {
+    cursor: pointer;
+}
+
+.nav-pills .nav-link.active {
+    -webkit-transition: background-color 0.15s ease-in;
+    -moz-transition: background-color 0.15s ease-in;
+    -ms-transition: background-color 0.15s ease-in;
+    -o-transition: background-color 0.15s ease-in;
+    transition: background-color 0.15s ease-in;
+}
+
