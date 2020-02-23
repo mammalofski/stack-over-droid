@@ -9,6 +9,8 @@ You can also filter the questions by date, sort them, search with tags, change t
 
 Read `the document.pdf` in the project for more info!
 
+The main technologies used are Django for Back-End, AndgularJS for Front-End, and BootStrap for styling.
+
 ### installation guide:
 
 ```
