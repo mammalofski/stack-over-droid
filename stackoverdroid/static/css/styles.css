@@ -52,15 +52,6 @@
     overflow: hidden;
 }
 
-.media .media-body .question-body {
-    opacity: 0;
-    -webkit-transition: opacity 0.3s;
-    -moz-transition: opacity 0.3s;
-    -ms-transition: opacity 0.3s;
-    -o-transition: opacity 0.3s;
-    transition: opacity 0.3s;
-}
-
 .media .media-body .question-title {
     font-size: 1.2rem;
     white-space: nowrap;
@@ -82,7 +73,6 @@
 .media .media-body .question-title.opened {
     white-space: normal;
 }
-
 
 .media .media-body .btn-outline-primary { /* the show / hide button*/
     margin-top: -1.2rem;
@@ -123,5 +113,10 @@
 
 .media .question-paradata .paradata {
     font-size: 9px;
+}
+
+.media .question-paradata .paradata.badge {
+    display: block;
+    padding: 0.25em 0.4em;
 }
 

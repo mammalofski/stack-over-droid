@@ -33,7 +33,8 @@
                         <div class="paradata mt-1">{{ question.answer_count }}</div>
                         <div class="paradata mb-2">answer{{ question.score == 1 ? '' : 's' }}</div>
                         <div class="paradata">{{ question.score }}</div>
-                        <div class="paradata mb-1">score{{ question.score == 1 ? '' : 's' }}</div>
+                        <div class="paradata mb-3">score{{ question.score == 1 ? '' : 's' }}</div>
+
                     </div>
                 </div>
 
@@ -43,9 +44,13 @@
                          ng-click="showQuestionBody = !showQuestionBody;showQuestionButtonClicked = true"
                          class="mt-0 question-title d-inline-block ng-class:{'opened': showQuestionBody}">{{ question.title }}</div>
 
+
                     <!--<div id="question-{{ question.question_id }}" ng-style="showQuestionBody && {'opacity': '1'}" class="question-body">-->
                     <div id="question-{{ question.question_id }}"
-                         ng-if="showQuestionButtonClicked">
+                         ng-if="showQuestionButtonClicked" class="question-body">
+
+                        <div class="badge badge-primary mr-1" ng-repeat="tag in question.tags">{{ tag }}</div>
+
                         <div class="media-body-html" ng-bind-html="question.body | trustHTML"></div>
 
                         <button type="button"
