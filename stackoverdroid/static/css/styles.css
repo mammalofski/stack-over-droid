@@ -103,6 +103,17 @@
     transition: opacity 0.5s;
 }
 
+.media .question-paradata.answer {
+    opacity: 1;
+    padding-left: 0;
+    width: 33px;
+}
+
+.media .question-paradata.answer .paradata.check {
+    font-size: 32px;
+    color: #00bc8c;
+}
+
 .media .question-paradata .paradata {
     font-size: 9px;
 }

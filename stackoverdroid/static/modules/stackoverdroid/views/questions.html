@@ -1,4 +1,4 @@
-<div ng-controller="questionsCtrl">
+<div ng-controller="questionsCtrl as ctrl">
     <main class="container">
         <div ng-init="more = false">
             <ul class="nav nav-pills nav-fill mt-3">
@@ -77,19 +77,23 @@
                                 <div class="tab-pane fade pt-3" id="filter">
                                     <div class="d-inline-block">Date filter from</div>
                                     <datepicker date-format="MM/dd/yyyy">
-                                        <input class="form-control ml-1 d-inline-block" ng-change="setFromDate(fromdate)" ng-model="fromdate"
+                                        <input class="form-control ml-1 d-inline-block"
+                                               ng-model="ctrl.scope.fromdate"
                                                type="text"/>
                                     </datepicker>
                                     <div class="d-inline-block">to</div>
                                     <datepicker date-format="MM/dd/yyyy">
-                                        <input class="form-control ml-1 d-inline-block" ng-change="setToDate(todate)" ng-model="todate" type="text"/>
+                                        <input class="form-control ml-1 d-inline-block"
+                                               ng-model="ctrl.scope.todate" type="text"/>
                                     </datepicker>
-                                    <div class="d-inline-block ml-3 mr-1"> sorting: </div>
+                                    <div class="d-inline-block ml-3 mr-1"> sorting:</div>
                                     <div class="form-group d-inline-block">
-                                        <select class="custom-select" ng-model="ordering" ng-change="setOrdering(ordering)" ng-options="order.id as order.title for order in [{'id': 'asc', 'title': 'ascending'}, {'id': 'desc', 'title': 'descending'}]">
+                                        <select class="custom-select" ng-model="ctrl.scope.ordering"
+                                                ng-options="order.id as order.title for order in [{'id': 'asc', 'title': 'ascending'}, {'id': 'desc', 'title': 'descending'}]">
                                         </select>
                                     </div>
-                                    <button type="button" class="btn btn-primary ml-3" ng-click="filterAndOrder()">Go</button>
+                                    <button type="button" class="btn btn-primary ml-3" ng-click="filterAndOrder()">Go
+                                    </button>
 
                                 </div>
                             </div>
@@ -99,7 +103,6 @@
 
             </div>
         </div>
-
         <div class="loading-overlay text-center">
             <div class="lds-ring">
                 <div></div>
@@ -168,12 +171,21 @@
                         <div id="answers-{{ question.question_id }}" ng-show="showAnswerButtonClicked">
                             <div class="media mt-3 answer"
                                  ng-repeat="answer in question.answers | orderBy: 'score' | orderBy: '-is_accepted'">
-                                <a href="#">
+                                <div>
                                     <img alt="32x32"
                                          class="mr-2 rounded" style="width: 32px; height: 32px;"
                                          ng-src="{{ answer.owner.profile_image }}"
                                          data-holder-rendered="true">
-                                </a>
+                                    <div class="question-paradata answer text-center">
+                                        <div class="paradata check" ng-if="answer.is_accepted">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div class="paradata mt-1">{{ answer.score }}{{ answer.score == 1 ? '' : 's' }}</div>
+                                        <div class="paradata">score</div>
+                                        <div class="paradata mt-3"><a target="_blank" ng-href="{{ answer.link }}">answer link</a> </div>
+                                    </div>
+                                </div>
+
                                 <div class="media-body pb-2 ">
                                     <div class="media-body-html" ng-bind-html="answer.body | trustHTML"></div>
                                     <div class="media mt-1 comment" ng-repeat="comment in answer.comments">
