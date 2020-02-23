@@ -1,6 +1,5 @@
 angular.module('Stackoverdroid', ['ui.router', '720kb.datepicker'])
     .config(function ($stateProvider, $urlRouterProvider) {
-        // $authProvider.tokenType = 'Token';
         $urlRouterProvider.otherwise("/");
         $stateProvider
             .state('questions', {

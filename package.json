@@ -5,6 +5,7 @@
   "description": "",
   "repository": "https://github.com/mammalofski/stack-over-droid",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
     "@uirouter/angularjs": "^1.0.25",
     "angular": "1.7.x",
     "angularjs-datepicker": "^2.1.23",

@@ -11,8 +11,6 @@ angular.module("Stackoverdroid")
             const now = new Date();
             $scope.fromdate = normalizeDate(new Date(now - 7 * 24 * 3600 * 1000));
             $scope.todate = normalizeDate(now);
-            console.log($scope.fromdate);
-            console.log($scope.todate);
             $scope.page = 1;
             $scope.pageSize = 10;
             $scope.sortType = 'creation';
@@ -1309,7 +1307,6 @@ angular.module("Stackoverdroid")
 
             this.get = function () {
                 const queryParams = this.buildQueryParams();
-                console.log(queryParams);
                 return this.fetchQuestions(queryParams)
             };
 

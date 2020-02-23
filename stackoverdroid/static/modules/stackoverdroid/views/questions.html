@@ -15,7 +15,7 @@
                 <button ng-click="more = !more; moreIsClicked = true" class="mt-1 btn btn-link"
                         data-toggle="collapse" data-target="#more-options"
                         aria-expanded="false" aria-controls="more-options">
-                    {{ more ? 'less' : 'more options' }}</button>
+                    {{ more ? 'less options' : 'more options' }}</button>
                 <div ng-if="moreIsClicked">
                     <div id="more-options" class="card border-primary mb-3">
                         <div class="card-body p-3">
@@ -173,6 +173,7 @@
                                  ng-repeat="answer in question.answers | orderBy: 'score' | orderBy: '-is_accepted'">
                                 <div>
                                     <img alt="32x32"
+                                         onerror="this.src='/static/images/default_profile_image.png';"
                                          class="mr-2 rounded" style="width: 32px; height: 32px;"
                                          ng-src="{{ answer.owner.profile_image }}"
                                          data-holder-rendered="true">
@@ -180,8 +181,8 @@
                                         <div class="paradata check" ng-if="answer.is_accepted">
                                             <i class="fas fa-check"></i>
                                         </div>
-                                        <div class="paradata mt-1">{{ answer.score }}{{ answer.score == 1 ? '' : 's' }}</div>
-                                        <div class="paradata">score</div>
+                                        <div class="paradata mt-1">{{ answer.score }}</div>
+                                        <div class="paradata">score{{ answer.score == 1 ? '' : 's' }}</div>
                                         <div class="paradata mt-3"><a target="_blank" ng-href="{{ answer.link }}">answer link</a> </div>
                                     </div>
                                 </div>
@@ -191,6 +192,7 @@
                                     <div class="media mt-1 comment" ng-repeat="comment in answer.comments">
                                         <a href="#">
                                             <img alt="32x32"
+                                                 onerror="this.src='/static/images/default_profile_image.png';"
                                                  class="mr-2 rounded" style="width: 32px; height: 32px;"
                                                  ng-src="{{ comment.owner.profile_image }}"
                                                  data-holder-rendered="true">
