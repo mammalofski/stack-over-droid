@@ -16,7 +16,7 @@ $ git clone git@github.com:mammalofski/stack-over-droid.git
 $ cd stack-over-droid/
 $ sudo npm install
 $ sudo pip3 install -r requirements.txt  # or you can workon you virtualenv and pip3 install -r requirements.txt
-$ cd cd stackoverdroid/
+$ cd stackoverdroid/
 $ python3 manage.py migrate
 $ python3 manage.py runserver
 ```
