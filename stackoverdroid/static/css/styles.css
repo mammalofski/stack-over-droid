@@ -91,3 +91,7 @@
     transition: background-color 0.15s ease-in;
 }
 
+.container .loading-overlay {
+    margin-top: 8rem;
+}
+
