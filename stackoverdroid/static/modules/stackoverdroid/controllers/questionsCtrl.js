@@ -45,7 +45,7 @@ angular.module("Stackoverdroid")
             // the main idea of the page is about android related questions
             this.tags = ['android'];
             // add other tags if needed
-            this.tags.concat(args.tags);
+            this.tags = this.tags.concat(args.tags);
             // this is a default filter that constructs the body of the response as desired. read the docs for more information about the filters
             this.filter = args.filter || '!0XR)HquYu8jeQaXDjI29B*Rqe';
             this.order = args.order || 'desc';
@@ -113,10 +113,9 @@ angular.module("Stackoverdroid")
         }
 
         $scope.applyTags = function (tags) {
-            $scope.moreTags = tags;
+            $scope.moreTags = tags.split(';');
             const args = argBuilderForGetQuestion();
             getQuestions(args);
-
         };
 
         $scope.filterAndOrder = function () {
