@@ -66,8 +66,23 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: calc(100% - 134px);
+    max-width: calc(100% - 1rem);
+    cursor: pointer;
+    -webkit-transition: color 100ms;
+    -moz-transition: color 100ms;
+    -ms-transition: color 100ms;
+    -o-transition: color 100ms;
+    transition: color 100ms;
 }
+
+.media .media-body .question-title:hover {
+    color: #3b87ba;
+}
+
+.media .media-body .question-title.opened {
+    white-space: normal;
+}
+
 
 .media .media-body .btn-outline-primary { /* the show / hide button*/
     margin-top: -1.2rem;

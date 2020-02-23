@@ -2,22 +2,27 @@
     <main class="container">
         <ul class="nav nav-pills nav-fill mt-3">
             <li class="nav-item">
-                <a class="nav-link ng-class:{'active': sortType == 'creation'}" ng-click="!fetchingQuestions && changeSorting('creation')">Latest Questions</a>
+                <a class="nav-link ng-class:{'active': sortType == 'creation'}"
+                   ng-click="!fetchingQuestions && changeSorting('creation')">Latest Questions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ng-class:{'active': sortType == 'votes'}" ng-click="!fetchingQuestions && changeSorting('votes')">Top Voted Questions</a>
+                <a class="nav-link ng-class:{'active': sortType == 'votes'}"
+                   ng-click="!fetchingQuestions && changeSorting('votes')">Top Voted Questions</a>
             </li>
         </ul>
         <div class="loading-overlay text-center">
-            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            <div class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
         <div class="my-3 p-3 bg-dark rounded box-shadow main-body">
             <h6 class="pb-2 mb-0 ">Questions</h6>
             <div class="media mt-2 question"
                  ng-repeat="question in questions"
-                 ng-mouseenter="showQuestionShowButton = true"
-                 ng-mouseleave="showQuestionShowButton = false"
-                 ng-init="showQuestionBody = false; showAnswers = false; showQuestionShowButton = false; showQuestionButtonClicked = false;showAnswerButtonClicked = false">
+                 ng-init="showQuestionBody = false; showAnswers = false; showQuestionButtonClicked = false;showAnswerButtonClicked = false">
 
                 <img alt="32x32"
                      onerror="this.src='/static/images/default_profile_image.png';"
@@ -25,16 +30,11 @@
                      ng-src="{{ question.owner.profile_image }}"
                      data-holder-rendered="true">
                 <div class="media-body pb-2 small">
-                    <div class="mt-0 question-title d-inline-block">{{ question.title }}</div>
-                    <button type="button"
-                            role="button"
-                            ng-style="showQuestionShowButton && {'opacity': '1'}"
-                            class="btn btn-outline-primary d-inline-block border-0 ml-1"
-                            data-toggle="collapse" data-target="#question-{{ question.question_id }}"
-                            aria-expanded="false" aria-controls="question-{{ question.question_id }}"
-                            ng-click="showQuestionBody = !showQuestionBody;showQuestionButtonClicked = true">
-                        {{ showQuestionBody ? 'Hide Question' : 'Show Question' }}
-                    </button>
+                    <div data-toggle="collapse" data-target="#question-{{ question.question_id }}"
+                         aria-expanded="false" aria-controls="question-{{ question.question_id }}"
+                         ng-click="showQuestionBody = !showQuestionBody;showQuestionButtonClicked = true"
+                         class="mt-0 question-title d-inline-block ng-class:{'opened': showQuestionBody}">{{ question.title }}</div>
+
                     <!--<div id="question-{{ question.question_id }}" ng-style="showQuestionBody && {'opacity': '1'}" class="question-body">-->
                     <div id="question-{{ question.question_id }}"
                          ng-if="showQuestionButtonClicked">
@@ -45,10 +45,12 @@
                                 ng-click="showAnswerButtonClicked = true;showAnswers = !showAnswers"
                                 data-toggle="collapse" data-target="#answers-{{ question.question_id }}"
                                 aria-expanded="false" aria-controls="answers-{{ question.question_id }}"
-                                class="btn btn-outline-success mt-3 border-0"> {{ showAnswers ? 'Hide answers' : 'Show answers' }}
+                                class="btn btn-outline-success mt-3 border-0">
+                            {{ showAnswers ? 'Hide answers' : 'Show answers' }}
                         </button>
                         <button ng-show="question.answer_count == 0"
-                                type="button" class="btn btn-outline-success mt-3 border-0">No answers</button>
+                                type="button" class="btn btn-outline-success mt-3 border-0">No answers
+                        </button>
                         <div id="answers-{{ question.question_id }}" ng-show="showAnswerButtonClicked">
                             <div class="media mt-3 answer" ng-repeat="answer in question.answers">
                                 <a href="#">
