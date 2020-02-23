@@ -58,7 +58,7 @@
                                 ng-click="showAnswerButtonClicked = true;showAnswers = !showAnswers"
                                 data-toggle="collapse" data-target="#answers-{{ question.question_id }}"
                                 aria-expanded="false" aria-controls="answers-{{ question.question_id }}"
-                                class="btn btn-outline-primary mt-3 border-0">
+                                class="btn mt-3 border-0 ng-class:{'btn-outline-primary': question.answer_count == 0, 'btn-outline-success': question.answer_count > 0}">
                             {{ showAnswers ? 'Hide answers' : 'Show answers' }}
                         </button>
                         <button ng-show="question.answer_count == 0"
