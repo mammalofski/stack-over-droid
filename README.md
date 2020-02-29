@@ -17,7 +17,7 @@ The main technologies used are Django for Back-End, AndgularJS for Front-End, an
 $ git clone git@github.com:mammalofski/stack-over-droid.git
 $ cd stack-over-droid/
 $ sudo npm install
-$ sudo pip3 install -r requirements.txt  # or you can workon you virtualenv and pip3 install -r requirements.txt
+$ sudo pip3 install -r requirements.txt  # or you can workon to a (new) virtualenv and pip3 install -r requirements.txt
 $ cd stackoverdroid/
 $ python3 manage.py migrate
 $ python3 manage.py runserver
