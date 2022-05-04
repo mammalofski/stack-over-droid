@@ -7,7 +7,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.1",
     "@uirouter/angularjs": "^1.0.25",
-    "angular": "1.7.x",
+    "angular": "1.8.x",
     "angularjs-datepicker": "^2.1.23",
     "bootstrap": "4.4.x",
     "jquery": "^3.4.1"
